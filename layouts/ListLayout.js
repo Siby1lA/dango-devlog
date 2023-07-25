@@ -66,7 +66,7 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
                   )}
                   <div className="ml-8 w-[80%]">
                     <div>
-                      <h3 className="mb-2 text-[32px] font-bold leading-8 tracking-tight">
+                      <h3 className="mb-2 text-[22px] font-bold leading-8 tracking-tight xl:text-[32px]">
                         <Link
                           href={`${
                             pageTitle === '개발'
