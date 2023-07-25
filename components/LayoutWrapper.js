@@ -10,8 +10,8 @@ import ThemeSwitch from './ThemeSwitch'
 const LayoutWrapper = ({ children }) => {
   return (
     <SectionContainer>
-      <div className="flex h-screen flex-col justify-between">
-        <header className="insert-0 fixed z-10 mx-auto flex w-full max-w-3xl items-center justify-between bg-white py-3 dark:bg-gray-900 xl:max-w-4xl">
+      <div className="flex h-screen flex-col">
+        <header className="flex w-full justify-between bg-white py-3 dark:bg-gray-900">
           <div>
             <Link href="/" aria-label={siteMetadata.headerTitle}>
               <div className="flex items-center justify-between">
@@ -44,7 +44,7 @@ const LayoutWrapper = ({ children }) => {
             <MobileNav />
           </div>
         </header>
-        <div className="pt-[80px]">
+        <div>
           <main className="mb-auto">{children}</main>
           <Footer />
         </div>
