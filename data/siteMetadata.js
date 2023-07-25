@@ -9,7 +9,7 @@ const siteMetadata = {
   siteRepo: 'https://github.com/Siby1lA/ildannyang-devlog',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',
-  socialBanner: '/static/images/twitter-card.png',
+  socialBanner: '/static/images/card.png',
   email: 'twilight9508@gmail.com',
   github: 'https://github.com/Siby1lA',
   facebook: 'https://facebook.com',
