@@ -58,6 +58,9 @@ module.exports = withBundleAnalyzer({
   eslint: {
     dirs: ['pages', 'components', 'lib', 'layouts', 'scripts'],
   },
+  images: {
+    domains: ['wp.toss.tech'], // 이미지 호스팅에 사용할 도메인 이름을 여기에 추가해주세요.
+  },
   async headers() {
     return [
       {

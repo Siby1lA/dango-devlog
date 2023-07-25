@@ -25,7 +25,8 @@ module.exports = {
         14: '3.5rem',
       },
       fontFamily: {
-        sans: ['InterVariable', ...defaultTheme.fontFamily.sans],
+        // sans: ['InterVariable', ...defaultTheme.fontFamily.sans],
+        serif: ['NotoSansKR', 'serif', ...defaultTheme.fontFamily.serif],
       },
       colors: {
         primary: colors.teal,

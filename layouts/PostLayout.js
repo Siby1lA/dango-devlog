@@ -14,13 +14,13 @@ const discussUrl = (slug) =>
     `${siteMetadata.siteUrl}/blog/${slug}`
   )}`
 
-const postDateTemplate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+const postDateTemplate = { year: 'numeric', month: 'long', day: 'numeric' }
 
 export default function PostLayout({ frontMatter, authorDetails, next, prev, children }) {
-  const { slug, fileName, date, title, images, tags } = frontMatter
+  const { slug, fileName, date, title, images, tags, poster } = frontMatter
 
   return (
-    <SectionContainer>
+    <div className="mx-auto max-w-2xl px-4">
       <BlogSEO
         url={`${siteMetadata.siteUrl}/blog/${slug}`}
         authorDetails={authorDetails}
@@ -28,125 +28,81 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
       />
       <ScrollTopAndComment />
       <article>
-        <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
-          <header className="pt-6 xl:pb-6">
-            <div className="space-y-1 text-center">
-              <dl className="space-y-10">
-                <div>
-                  <dt className="sr-only">Published on</dt>
-                  <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                    <time dateTime={date}>
-                      {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
-                    </time>
-                  </dd>
-                </div>
-              </dl>
+        <div>
+          <header className="pt-6 xl:pb-12">
+            {poster && (
+              <Image
+                src={poster}
+                width="644px"
+                height="322px"
+                alt="poster"
+                className="rounded-[12px]"
+              />
+            )}
+            <div className="my-8 space-y-1">
               <div>
                 <PageTitle>{title}</PageTitle>
               </div>
             </div>
+            {authorDetails.map((author) => (
+              <div className="flex items-center space-x-2" key={author.name}>
+                {author.avatar && (
+                  <Image
+                    src={author.avatar}
+                    width="55px"
+                    height="55px"
+                    alt="avatar"
+                    className="h-10 w-10 rounded-full object-cover"
+                  />
+                )}
+                <dl className="whitespace-nowrap text-sm font-medium leading-5">
+                  <dt className="sr-only">Name</dt>
+                  <dd className="mb-1 text-[17px] font-semibold text-[#4E5968] dark:text-gray-100">
+                    {author.name} - Frontend Developer
+                  </dd>
+                  <dd className="text-[14px] text-gray-400 dark:text-gray-300">
+                    <time dateTime={date}>
+                      {new Date(date).toLocaleDateString(siteMetadata.locale).slice(0, -1)}
+                    </time>
+                  </dd>
+                </dl>
+              </div>
+            ))}
           </header>
-          <div
-            className="divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0"
-            style={{ gridTemplateRows: 'auto 1fr' }}
-          >
-            <dl className="pt-6 pb-10 xl:border-b xl:border-gray-200 xl:pt-11 xl:dark:border-gray-700">
-              <dt className="sr-only">Authors</dt>
-              <dd>
-                <ul className="flex justify-center space-x-8 sm:space-x-12 xl:block xl:space-x-0 xl:space-y-8">
-                  {authorDetails.map((author) => (
-                    <li className="flex items-center space-x-2" key={author.name}>
-                      {author.avatar && (
-                        <Image
-                          src={author.avatar}
-                          width="38px"
-                          height="38px"
-                          alt="avatar"
-                          className="h-10 w-10 rounded-full"
-                        />
-                      )}
-                      <dl className="whitespace-nowrap text-sm font-medium leading-5">
-                        <dt className="sr-only">Name</dt>
-                        <dd className="text-gray-900 dark:text-gray-100">{author.name}</dd>
-                        <dt className="sr-only">Twitter</dt>
-                        <dd>
-                          {author.twitter && (
-                            <Link
-                              href={author.twitter}
-                              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                            >
-                              {author.twitter.replace('https://twitter.com/', '@')}
-                            </Link>
-                          )}
-                        </dd>
-                      </dl>
-                    </li>
-                  ))}
-                </ul>
-              </dd>
-            </dl>
+          <div>
             <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
               <div className="prose max-w-none pt-10 pb-8 dark:prose-dark">{children}</div>
-              <div className="pt-6 pb-6 text-sm text-gray-700 dark:text-gray-300">
-                <Link href={discussUrl(slug)} rel="nofollow">
-                  {'Discuss on Twitter'}
-                </Link>
-                {` • `}
-                <Link href={editUrl(fileName)}>{'View on GitHub'}</Link>
-              </div>
               <Comments frontMatter={frontMatter} />
             </div>
             <footer>
               <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">
-                {tags && (
-                  <div className="py-4 xl:py-8">
-                    <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                      Tags
-                    </h2>
-                    <div className="flex flex-wrap">
-                      {tags.map((tag) => (
-                        <Tag key={tag} text={tag} />
-                      ))}
+                <div className="flex justify-between">
+                  {prev && (
+                    <div>
+                      <h2 className="text-sm tracking-wide text-gray-500 dark:text-gray-400">
+                        이전 글
+                      </h2>
+                      <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+                        <Link href={`/blog/${prev.slug}`}>{prev.title}</Link>
+                      </div>
                     </div>
-                  </div>
-                )}
-                {(next || prev) && (
-                  <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
-                    {prev && (
-                      <div>
-                        <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                          Previous Article
-                        </h2>
-                        <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                          <Link href={`/blog/${prev.slug}`}>{prev.title}</Link>
-                        </div>
+                  )}
+                  {next && (
+                    <div>
+                      <h2 className="text-sm tracking-wide text-gray-500 dark:text-gray-400">
+                        다음 글
+                      </h2>
+                      <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
+                        <Link href={`/blog/${next.slug}`}>{next.title}</Link>
                       </div>
-                    )}
-                    {next && (
-                      <div>
-                        <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
-                          Next Article
-                        </h2>
-                        <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                          <Link href={`/blog/${next.slug}`}>{next.title}</Link>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-              <div className="pt-4 xl:pt-8">
-                <Link
-                  href="/blog"
-                  className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                >
-                  &larr; Back to the blog
-                </Link>
+                    </div>
+                  )}
+                </div>
               </div>
             </footer>
           </div>
         </div>
       </article>
-    </SectionContainer>
+    </div>
   )
 }

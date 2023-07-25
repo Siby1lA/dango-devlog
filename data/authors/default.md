@@ -1,5 +1,5 @@
 ---
-name: Tails Azimuth
+name: 박수빈
 avatar: /static/images/avatar.png
 occupation: Professor of Atmospheric Science
 company: Stanford University
