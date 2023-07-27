@@ -36,7 +36,7 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
                 width="644px"
                 height="322px"
                 alt="poster"
-                className="rounded-[12px]"
+                className="rounded-[12px] object-cover"
               />
             )}
             <div className="my-8 space-y-1">
@@ -71,7 +71,9 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
           </header>
           <div>
             <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
-              <div className="prose max-w-none pt-10 pb-8 dark:prose-dark">{children}</div>
+              <div className="prose max-w-none pt-10 pb-8 text-[19px] text-[#334D4B] dark:prose-dark">
+                {children}
+              </div>
               <Comments frontMatter={frontMatter} />
             </div>
             <footer>

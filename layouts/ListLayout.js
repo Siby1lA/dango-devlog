@@ -1,6 +1,4 @@
 import Link from '@/components/Link'
-import Tag from '@/components/Tag'
-import siteMetadata from '@/data/siteMetadata'
 import { useState } from 'react'
 import Pagination from '@/components/Pagination'
 import formatDate from '@/lib/utils/formatDate'
@@ -58,8 +56,8 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
                   {poster && (
                     <Image
                       src={poster}
-                      width="180px"
-                      height="145px"
+                      width="200px"
+                      height="160px"
                       alt="poster"
                       className="rounded-[12px] object-cover"
                     />
