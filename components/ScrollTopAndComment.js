@@ -17,8 +17,9 @@ const ScrollTopAndComment = () => {
   const handleScrollTop = () => {
     window.scrollTo({ top: 0 })
   }
+
   const handleScrollToComment = () => {
-    document.getElementById('comment').scrollIntoView()
+    document.getElementById('survey').scrollIntoView()
   }
   return (
     <div
