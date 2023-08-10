@@ -80,7 +80,7 @@ export default function Survey() {
           <div className="flex items-center justify-center text-lg">
             <button
               type="submit"
-              className="mr-4 rounded-[12px] bg-[#f97148] px-8 py-[10px] font-semibold text-[#333D4B] dark:text-gray-100"
+              className="mt-4 mr-4 rounded-[12px] bg-[#f97148] px-8 py-[10px] font-semibold text-[#333D4B] dark:text-gray-100"
             >
               보내기
             </button>
