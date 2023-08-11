@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 export default function Survey() {
   const [formState, setformState] = useState('')
@@ -8,9 +8,19 @@ export default function Survey() {
     setSubmitData(event.target.value)
   }
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault()
-    console.log(submitData)
+  const submit = async () => {
+    const { doc, setDoc } = await import('firebase/firestore')
+    const { fireStoreDB } = await import('./firebase.js')
+    const { uid } = await import('uid')
+    const userRef = doc(fireStoreDB, `survey/${formState}${uid()}`)
+    try {
+      await setDoc(userRef, {
+        type: formState,
+        content: submitData,
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -44,7 +54,7 @@ export default function Survey() {
           </div>
         </>
       ) : (
-        <form onSubmit={handleFormSubmit} className="w-full">
+        <>
           <div className="flex w-full flex-col items-center">
             <div className="absolute right-6 top-6">
               <svg
@@ -79,13 +89,14 @@ export default function Survey() {
           </div>
           <div className="flex items-center justify-center text-lg">
             <button
-              type="submit"
+              onClick={() => submit()}
+              type="button"
               className="mt-4 mr-4 rounded-[12px] bg-[#f97148] px-8 py-[10px] font-semibold text-[#333D4B] dark:text-gray-100"
             >
               보내기
             </button>
           </div>
-        </form>
+        </>
       )}
     </div>
   )
