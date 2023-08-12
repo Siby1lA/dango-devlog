@@ -1,6 +1,9 @@
+import { useRouter } from 'next/router.js'
 import { useState } from 'react'
 
 export default function Survey() {
+  const router = useRouter()
+  const blogTitle = router.pathname.split('/')[1]
   const [formState, setformState] = useState('')
   const [submitData, setSubmitData] = useState('')
 
@@ -9,15 +12,12 @@ export default function Survey() {
   }
 
   const submit = async () => {
-    const { doc, setDoc } = await import('firebase/firestore')
+    const { doc, setDoc, arrayUnion } = await import('firebase/firestore')
     const { fireStoreDB } = await import('./firebase.js')
-    const { uid } = await import('uid')
-    const userRef = doc(fireStoreDB, `survey/${formState}${uid()}`)
+    const newBlog = { type: formState, content: submitData }
+    const userRef = doc(fireStoreDB, `survey/${blogTitle}`)
     try {
-      await setDoc(userRef, {
-        type: formState,
-        content: submitData,
-      })
+      await setDoc(userRef, { blog: { [formState]: arrayUnion(newBlog) } }, { merge: true })
     } catch (error) {
       console.log(error)
     }

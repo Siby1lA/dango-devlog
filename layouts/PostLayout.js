@@ -8,7 +8,6 @@ import Survey from '@/components/Survey'
 
 export default function PostLayout({ frontMatter, authorDetails, next, prev, children }) {
   const { slug, fileName, date, title, images, tags, poster } = frontMatter
-
   return (
     <div className="mx-auto max-w-2xl px-4">
       <BlogSEO
