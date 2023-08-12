@@ -5,16 +5,20 @@ import Image from '@/components/Image'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import Survey from '@/components/Survey'
+import Toast from '@/components/Toast'
+import { useState } from 'react'
 
 export default function PostLayout({ frontMatter, authorDetails, next, prev, children }) {
+  const [toastView, setToastView] = useState(false)
   const { slug, fileName, date, title, images, tags, poster } = frontMatter
   return (
-    <div className="mx-auto max-w-2xl px-4">
+    <div className="mx-auto max-w-2xl px-4 pb-[90px]">
       <BlogSEO
         url={`${siteMetadata.siteUrl}/blog/${slug}`}
         authorDetails={authorDetails}
         {...frontMatter}
       />
+      {toastView && <Toast />}
       <ScrollTopAndComment />
       <article>
         <div>
@@ -63,7 +67,7 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
               <div className="prose max-w-none pt-10 pb-8 text-[19px] text-[#334D4B] dark:prose-dark">
                 {children}
               </div>
-              <Survey />
+              <Survey setToastView={setToastView} />
             </div>
             <footer>
               <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">

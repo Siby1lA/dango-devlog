@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router.js'
 import { useState } from 'react'
 
-export default function Survey() {
+export default function Survey({ setToastView }) {
   const router = useRouter()
   const blogTitle = router.pathname.split('/')[1]
   const [formState, setformState] = useState('')
@@ -12,12 +12,19 @@ export default function Survey() {
   }
 
   const submit = async () => {
+    if (!submitData) return
     const { doc, setDoc, arrayUnion } = await import('firebase/firestore')
     const { fireStoreDB } = await import('./firebase.js')
     const newBlog = { type: formState, content: submitData }
     const userRef = doc(fireStoreDB, `survey/${blogTitle}`)
     try {
       await setDoc(userRef, { blog: { [formState]: arrayUnion(newBlog) } }, { merge: true })
+      setToastView(true)
+      setTimeout(() => {
+        setToastView(false)
+      }, 3000)
+      setformState('')
+      setSubmitData('')
     } catch (error) {
       console.log(error)
     }
@@ -30,7 +37,7 @@ export default function Survey() {
     >
       {!formState ? (
         <>
-          <div className="mb-6 flex flex-col items-center">
+          <div className="mb-6 flex flex-col items-center pt-[20px]">
             <span className="mb-1 text-2xl font-extrabold text-[#333D4B] dark:text-gray-100">
               이번 글은 어떠셨나요?
             </span>
