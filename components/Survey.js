@@ -18,7 +18,7 @@ export default function Survey({ setToastView }) {
     const newBlog = { type: formState, content: submitData }
     const userRef = doc(fireStoreDB, `survey/${blogTitle}`)
     try {
-      await setDoc(userRef, { blog: { [formState]: arrayUnion(newBlog) } }, { merge: true })
+      await setDoc(userRef, { [blogTitle]: { [formState]: arrayUnion(newBlog) } }, { merge: true })
       setToastView(true)
       setTimeout(() => {
         setToastView(false)
