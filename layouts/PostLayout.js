@@ -51,7 +51,7 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
                 <dl className="whitespace-nowrap text-sm font-medium leading-5">
                   <dt className="sr-only">Name</dt>
                   <dd className="mb-1 text-[17px] font-semibold text-[#4E5968] dark:text-gray-100">
-                    {author.name} - Frontend Developer
+                    {author.name}
                   </dd>
                   <dd className="text-[14px] text-gray-400 dark:text-gray-300">
                     <time dateTime={date}>
