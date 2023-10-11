@@ -60,7 +60,7 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
                       width="200px"
                       height="160px"
                       alt="poster"
-                      className="rounded-[12px] object-cover"
+                      className="items-center rounded-[12px] object-cover"
                     />
                   )}
                   <div className="ml-8 w-[80%]">
