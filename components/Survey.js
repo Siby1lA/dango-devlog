@@ -1,11 +1,24 @@
 import { useRouter } from 'next/router.js'
 import { useState } from 'react'
 
-export default function Survey({ setToastView }) {
+export default function Survey({ title, setToastView }) {
   const router = useRouter()
-  const blogTitle = router.pathname.split('/')[1]
+  const type = router.asPath.split('/')[1]
   const [formState, setformState] = useState('')
   const [submitData, setSubmitData] = useState('')
+
+  const getKoreaTodayDateInfo = () => {
+    const DATE = new Date() // 현재 날짜(로컬 기준) 가져오기
+    const utc = DATE.getTime() + DATE.getTimezoneOffset() * 60 * 1000 // utc 표준시 도출
+    const kstGap = 9 * 60 * 60 * 1000 // 한국 kst 기준시간 더하기
+    const today = new Date(utc + kstGap) // 한국 시간으로 date 객체 만들기(오늘)
+    const year = today.getFullYear()
+    const month = today.getMonth() + 1
+    const date = today.getDate()
+    const hour = today.getHours()
+    const minute = today.getMinutes()
+    return [year, month, date, hour, minute]
+  }
 
   const handleSubmitDataChange = (event) => {
     setSubmitData(event.target.value)
@@ -15,10 +28,12 @@ export default function Survey({ setToastView }) {
     if (!submitData) return
     const { doc, setDoc, arrayUnion } = await import('firebase/firestore')
     const { fireStoreDB } = await import('./firebase.js')
-    const newBlog = { type: formState, content: submitData }
-    const userRef = doc(fireStoreDB, `survey/${blogTitle}`)
+    const [year, month, date, hour, minute] = getKoreaTodayDateInfo()
+    const createdAt = year + '년 ' + month + '월 ' + date + '일 ' + hour + '시 ' + minute + '분'
+    const newBlog = { content: submitData, createdAt }
+    const userRef = doc(fireStoreDB, `survey/${type}`)
     try {
-      await setDoc(userRef, { [blogTitle]: { [formState]: arrayUnion(newBlog) } }, { merge: true })
+      await setDoc(userRef, { [title]: { [formState]: arrayUnion(newBlog) } }, { merge: true })
       setToastView(true)
       setTimeout(() => {
         setToastView(false)
