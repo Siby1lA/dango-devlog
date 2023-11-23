@@ -1,24 +1,12 @@
 import { useRouter } from 'next/router.js'
 import { useState } from 'react'
+import { getKoreaTodayDateInfo } from 'utils/survey.js'
 
 export default function Survey({ title, setToastView }) {
   const router = useRouter()
   const type = router.asPath.split('/')[1]
-  const [formState, setformState] = useState('')
+  const [formState, setFormState] = useState('')
   const [submitData, setSubmitData] = useState('')
-
-  const getKoreaTodayDateInfo = () => {
-    const DATE = new Date() // 현재 날짜(로컬 기준) 가져오기
-    const utc = DATE.getTime() + DATE.getTimezoneOffset() * 60 * 1000 // utc 표준시 도출
-    const kstGap = 9 * 60 * 60 * 1000 // 한국 kst 기준시간 더하기
-    const today = new Date(utc + kstGap) // 한국 시간으로 date 객체 만들기(오늘)
-    const year = today.getFullYear()
-    const month = today.getMonth() + 1
-    const date = today.getDate()
-    const hour = today.getHours()
-    const minute = today.getMinutes()
-    return [year, month, date, hour, minute]
-  }
 
   const handleSubmitDataChange = (event) => {
     setSubmitData(event.target.value)
@@ -38,7 +26,7 @@ export default function Survey({ title, setToastView }) {
       setTimeout(() => {
         setToastView(false)
       }, 3000)
-      setformState('')
+      setFormState('')
       setSubmitData('')
     } catch (error) {
       console.log(error)
@@ -62,13 +50,13 @@ export default function Survey({ title, setToastView }) {
           </div>
           <div className="text-lg">
             <button
-              onClick={() => setformState('GOOD')}
+              onClick={() => setFormState('GOOD')}
               className="mr-4 rounded-[12px] bg-[#f97148] px-8 py-[10px] font-semibold text-[#333D4B] dark:text-gray-100"
             >
               유용해요
             </button>
             <button
-              onClick={() => setformState('BAD')}
+              onClick={() => setFormState('BAD')}
               className="rounded-[12px] bg-[#EDEDED] px-8 py-[10px] font-semibold text-[#333D4B] dark:bg-[#1c1c1c] dark:text-gray-100"
             >
               아쉬워요
@@ -81,7 +69,7 @@ export default function Survey({ title, setToastView }) {
             <div className="absolute right-6 top-6">
               <svg
                 onClick={() => {
-                  setformState('')
+                  setFormState('')
                   setSubmitData('')
                 }}
                 className="h-7 w-7 cursor-pointer text-[#333D4B] dark:text-gray-100"
