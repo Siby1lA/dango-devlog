@@ -69,32 +69,6 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
               </div>
               <Survey title={title} setToastView={setToastView} />
             </div>
-            <footer>
-              <div className="divide-gray-200 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">
-                <div className="flex justify-between">
-                  {prev && (
-                    <div>
-                      <h2 className="text-sm tracking-wide text-gray-500 dark:text-gray-400">
-                        이전 글
-                      </h2>
-                      <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                        <Link href={`/blog/${prev.slug}`}>{prev.title}</Link>
-                      </div>
-                    </div>
-                  )}
-                  {next && (
-                    <div>
-                      <h2 className="text-sm tracking-wide text-gray-500 dark:text-gray-400">
-                        다음 글
-                      </h2>
-                      <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                        <Link href={`/blog/${next.slug}`}>{next.title}</Link>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </footer>
           </div>
         </div>
       </article>
