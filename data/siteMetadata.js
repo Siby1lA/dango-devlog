@@ -1,8 +1,8 @@
 const siteMetadata = {
-  title: '일단냥 Tech',
-  author: '일단냥 Tech',
-  headerTitle: '일단냥 Tech',
-  description: '일본어 단어장앱인 일단냥의 기술 블로그입니다.',
+  title: '당고당고',
+  author: 'subin Park',
+  headerTitle: '당고당고 블로그',
+  description: '일본어 단어장앱인 당고당고의 기술 블로그입니다.',
   language: 'ko-kr',
   theme: 'light', // system, dark or light
   siteUrl: 'https://ildannyang-devlog.vercel.app/',

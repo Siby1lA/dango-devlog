@@ -1,5 +1,5 @@
 ---
-name: 박수빈
+name: Link
 avatar: /static/images/avatar.png
 occupation: Professor of Atmospheric Science
 company: Stanford University

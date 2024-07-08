@@ -45,7 +45,7 @@ export default function Survey({ title, setToastView }) {
               이번 글은 어떠셨나요?
             </span>
             <span className="text-[15px] text-gray-600 dark:text-gray-400">
-              일단냥은 항상 여러분의 의견을 듣고 있어요.
+              당고당고는 항상 여러분의 의견을 듣고 있어요.
             </span>
           </div>
           <div className="text-lg">
@@ -81,7 +81,7 @@ export default function Survey({ title, setToastView }) {
                 <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
               </svg>
             </div>
-            <span className="mt-2 mb-6 text-2xl font-extrabold text-[#333D4B] dark:text-gray-100">
+            <span className="mb-6 mt-2 text-2xl font-extrabold text-[#333D4B] dark:text-gray-100">
               어떤 점이 유용하거나 아쉬우셨나요?
             </span>
             <textarea
@@ -101,7 +101,7 @@ export default function Survey({ title, setToastView }) {
             <button
               onClick={() => submit()}
               type="button"
-              className="mt-4 mr-4 rounded-[12px] bg-[#f97148] px-8 py-[10px] font-semibold text-[#333D4B] dark:text-gray-100"
+              className="mr-4 mt-4 rounded-[12px] bg-[#f97148] px-8 py-[10px] font-semibold text-[#333D4B] dark:text-gray-100"
             >
               보내기
             </button>
