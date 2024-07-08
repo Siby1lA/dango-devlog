@@ -64,7 +64,7 @@ export default function PostLayout({ frontMatter, authorDetails, next, prev, chi
           </header>
           <div>
             <div className="xl:col-span-3 xl:row-span-2 xl:pb-0">
-              <div className="prose max-w-none pt-10 pb-8 text-[19px] text-[#334D4B] dark:prose-dark">
+              <div className="prose max-w-none pb-8 pt-10 text-[19px] text-[#334D4B] dark:prose-dark">
                 {children}
               </div>
               <Survey title={title} setToastView={setToastView} />
